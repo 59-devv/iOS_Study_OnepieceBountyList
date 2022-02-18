@@ -13,6 +13,8 @@
 		EE8B932427BF4E7300234365 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE8B932327BF4E7300234365 /* Assets.xcassets */; };
 		EE8B932727BF4E7300234365 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE8B932527BF4E7300234365 /* LaunchScreen.storyboard */; };
 		EE8B932F27BF4F0400234365 /* BountyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B932E27BF4F0400234365 /* BountyViewController.swift */; };
+		EE8B933127BF6CDC00234365 /* ListCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B933027BF6CDC00234365 /* ListCustomCell.swift */; };
+		EE8B933327BF714500234365 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B933227BF714500234365 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		EE8B932627BF4E7300234365 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE8B932827BF4E7300234365 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE8B932E27BF4F0400234365 /* BountyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BountyViewController.swift; sourceTree = "<group>"; };
+		EE8B933027BF6CDC00234365 /* ListCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCustomCell.swift; sourceTree = "<group>"; };
+		EE8B933227BF714500234365 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				EE8B932527BF4E7300234365 /* LaunchScreen.storyboard */,
 				EE8B932827BF4E7300234365 /* Info.plist */,
 				EE8B932E27BF4F0400234365 /* BountyViewController.swift */,
+				EE8B933027BF6CDC00234365 /* ListCustomCell.swift */,
+				EE8B933227BF714500234365 /* DetailViewController.swift */,
 			);
 			path = OnePiceBountyList;
 			sourceTree = "<group>";
@@ -140,6 +146,8 @@
 			files = (
 				EE8B931B27BF4E7000234365 /* AppDelegate.swift in Sources */,
 				EE8B932F27BF4F0400234365 /* BountyViewController.swift in Sources */,
+				EE8B933327BF714500234365 /* DetailViewController.swift in Sources */,
+				EE8B933127BF6CDC00234365 /* ListCustomCell.swift in Sources */,
 				EE8B931D27BF4E7000234365 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
