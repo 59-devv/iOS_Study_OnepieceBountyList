@@ -15,6 +15,7 @@
 		EE8B932F27BF4F0400234365 /* BountyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B932E27BF4F0400234365 /* BountyViewController.swift */; };
 		EE8B933127BF6CDC00234365 /* ListCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B933027BF6CDC00234365 /* ListCustomCell.swift */; };
 		EE8B933327BF714500234365 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B933227BF714500234365 /* DetailViewController.swift */; };
+		EED3AC4B27C9196700F1CD95 /* BountyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3AC4A27C9196600F1CD95 /* BountyInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		EE8B932E27BF4F0400234365 /* BountyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BountyViewController.swift; sourceTree = "<group>"; };
 		EE8B933027BF6CDC00234365 /* ListCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCustomCell.swift; sourceTree = "<group>"; };
 		EE8B933227BF714500234365 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		EED3AC4A27C9196600F1CD95 /* BountyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BountyInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				EE8B932E27BF4F0400234365 /* BountyViewController.swift */,
 				EE8B933027BF6CDC00234365 /* ListCustomCell.swift */,
 				EE8B933227BF714500234365 /* DetailViewController.swift */,
+				EED3AC4A27C9196600F1CD95 /* BountyInfo.swift */,
 			);
 			path = OnePiceBountyList;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				EE8B932F27BF4F0400234365 /* BountyViewController.swift in Sources */,
 				EE8B933327BF714500234365 /* DetailViewController.swift in Sources */,
 				EE8B933127BF6CDC00234365 /* ListCustomCell.swift in Sources */,
+				EED3AC4B27C9196700F1CD95 /* BountyInfo.swift in Sources */,
 				EE8B931D27BF4E7000234365 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
