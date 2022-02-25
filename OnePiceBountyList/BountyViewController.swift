@@ -9,7 +9,6 @@ import UIKit
 
 class BountyViewController: UIViewController {
     
-    
     // MVVM 찾기
     // 1. Model
     //   - 데이터를 구성할 BountyInfo struct 만들기
@@ -20,7 +19,6 @@ class BountyViewController: UIViewController {
     //   - ViewModel을 만들어서, 데이터 전달 (Model을 가지고 있어야 함)
     //   - View Layer에서 필요한 메서드 만들기
 
-    
     let viewModel = BountyViewModel()
     
 //    Model로 만들어주었으므로, 아래는 주석처리함
@@ -65,51 +63,53 @@ class BountyViewController: UIViewController {
     }
 }
 
-// UITableViewDataSource
-// : 몇 개 보여줄 것인가, 어떻게 보여줄 것인가를 커스텀으로 정의해준다.
-// : 위 두 가지는 필수적으로 정의를 해주어야 한다.
-extension BountyViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+// UICollectionViewDataSource
+extension BountyViewController: UICollectionViewDataSource {
+   
+    // 셀을 몇 개 보여줄까요?
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numOfBountyInfoList
-//        return bountyInfoList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCustomCell else {
-            return UITableViewCell()
+    // 셀을 어떻게 보여줄까요?
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath) as? GridCell else {
+            return UICollectionViewCell()
         }
-        // View Model 적용 후
-        // 리팩토링 전
-        let bountyInfo = viewModel.bountyInfo(at: indexPath.row)
-//        cell.imgView.image = bountyInfo.image
-//        cell.bountyLabel.text = "\(bountyInfo.bounty)"
-//        cell.nameLabel.text = bountyInfo.name
         
-        // 리팩토링을 통해 Cell에서 메서드를 호출하여 Cell 업데이트
+        let bountyInfo = viewModel.bountyInfo(at: indexPath.row)
         cell.updateCell(data: bountyInfo)
         
-        // View Model 적용 전
-//        let bountyInfo = bountyInfoList[indexPath.row]
-//        let image = UIImage(named: "\(nameList[indexPath.row]).jpg")
-//        cell.imgView.image = image
-//        cell.bountyLabel.text = "\(bountyList[indexPath.row])"
-//        cell.nameLabel.text = nameList[indexPath.row]
-
         return cell
     }
 }
 
-// UITableViewDelegate
-// : 클릭했을 때 어떻게 할 것인가를 정의해준다.
-extension BountyViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("------> 현재 번호: \(indexPath.row)")
-        
-        // withIdentifier에 설정한 Segue Identifier 이름을 넣어준다.
-        // sender는 Segue를 수행하는데 있어서 특정 Object를 함께 보낼 수 있다.
-        // Modal에 정보를 보내줘야 하므로, sender에 indexPath.row를 넣어 보내준다.
-        // 여기서 보낸 정보는, 상단 'prepare' 함수로 전달된다.
-        performSegue(withIdentifier: "showDetailModally", sender: indexPath.row)
+// UICollectionViewDelegate
+// 이 것은 필수적으로 구현해야 하는 것은 아니다.
+// 셀을 터치했을 때 어떻게 할까요?
+extension BountyViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showDetailModally", sender: indexPath.item)
+    }
+}
+
+// UICollectionViewDelegateFlowLayout
+// 이 것은 필수적으로 구현해야 하는 것은 아니다.
+// Layout과 관련해서, 셀의 사이즈가 디바이스마다 다르기 때문에 변경되어야 한다.
+// Cell Size를 변경하기 위해 사용했다.
+extension BountyViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemSpacing: CGFloat = 10
+        let textAreaHeight: CGFloat = 65
+
+        // 각 셀마다의 너비를 정해준다.
+        // collectionView.bounds 를 하면, collectionView 전체의 사이즈를 알 수 있다.
+        let width: CGFloat = (collectionView.bounds.width - itemSpacing) / 2
+        // 이미지는 7:10의 비율을 가지고 있기 때문에, 높이는 7:10에서 텍스트 영역만큼을 더하면 된다.
+        // 텍스트 영역의 높이는 임의로 65로 지정했다.
+        let height: CGFloat = (width * 10 / 7) + textAreaHeight
+
+        return CGSize(width: width, height: height)
     }
 }
 
@@ -125,21 +125,73 @@ class BountyViewModel {
         BountyInfo(name: "sanji", bounty: 77000000),
         BountyInfo(name: "zoro", bounty: 120000000)
     ]
-    
+
     // 현상금이 높은 순서대로 정렬해주기
     var sortedBountyList: [BountyInfo] {
         bountyInfoList.sorted { prev, next in
             return prev.bounty > next.bounty
         }
     }
-    
+
     // 데이터가 몇개인지 반환
     var numOfBountyInfoList: Int {
         return bountyInfoList.count
     }
-    
+
     // 해당 인덱스에 있는 BountyInfo 찾기
     func bountyInfo(at index: Int) -> BountyInfo {
         return sortedBountyList[index]
     }
 }
+
+
+// UITableViewDataSource
+// UICollectionView로 리팩토링 하면서, 주석처리 하였음
+// : 몇 개 보여줄 것인가, 어떻게 보여줄 것인가를 커스텀으로 정의해준다.
+// : 위 두 가지는 필수적으로 정의를 해주어야 한다.
+//extension BountyViewController: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return viewModel.numOfBountyInfoList
+////        return bountyInfoList.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCustomCell else {
+//            return UITableViewCell()
+//        }
+//        // View Model 적용 후
+//        // 리팩토링 전
+//        let bountyInfo = viewModel.bountyInfo(at: indexPath.row)
+////        cell.imgView.image = bountyInfo.image
+////        cell.bountyLabel.text = "\(bountyInfo.bounty)"
+////        cell.nameLabel.text = bountyInfo.name
+//
+//        // 리팩토링을 통해 Cell에서 메서드를 호출하여 Cell 업데이트
+//        cell.updateCell(data: bountyInfo)
+//
+//        // View Model 적용 전
+////        let bountyInfo = bountyInfoList[indexPath.row]
+////        let image = UIImage(named: "\(nameList[indexPath.row]).jpg")
+////        cell.imgView.image = image
+////        cell.bountyLabel.text = "\(bountyList[indexPath.row])"
+////        cell.nameLabel.text = nameList[indexPath.row]
+//
+//        return cell
+//    }
+//}
+//
+// UITableViewDelegate
+// UICollectionView로 리팩토링 하면서, 주석처리 하였음
+// : 클릭했을 때 어떻게 할 것인가를 정의해준다.
+//extension BountyViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("------> 현재 번호: \(indexPath.row)")
+//
+//        // withIdentifier에 설정한 Segue Identifier 이름을 넣어준다.
+//        // sender는 Segue를 수행하는데 있어서 특정 Object를 함께 보낼 수 있다.
+//        // Modal에 정보를 보내줘야 하므로, sender에 indexPath.row를 넣어 보내준다.
+//        // 여기서 보낸 정보는, 상단 'prepare' 함수로 전달된다.
+//        performSegue(withIdentifier: "showDetailModally", sender: indexPath.row)
+//    }
+//}
+//
