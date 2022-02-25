@@ -9,8 +9,31 @@ import UIKit
 
 class BountyViewController: UIViewController {
     
-    let nameList = ["brook", "chopper", "franky", "luffy", "nami", "robin", "sanji", "zoro"]
-    let bountyList = [3300000, 50, 4400000, 300000000, 1600000, 8000000, 7700000, 120000000]
+    
+    // MVVM 찾기
+    // 1. Model
+    //   - 데이터를 구성할 BountyInfo struct 만들기
+    // 2. View
+    //   - ListCell이 View 역할을 한다.
+    //   - ListCell에서 필요한 정보를 ViewModel로부터 받도록 하기
+    // 3. ViewModel
+    //   - ViewModel을 만들어서, 데이터 전달 (Model을 가지고 있어야 함)
+    //   - View Layer에서 필요한 메서드 만들기
+
+    let bountyInfoList: [BountyInfo] = [
+        BountyInfo(name: "brook", bounty: 3300000),
+        BountyInfo(name: "chopper", bounty: 50),
+        BountyInfo(name: "franky", bounty: 4400000),
+        BountyInfo(name: "luffy", bounty: 300000000),
+        BountyInfo(name: "nami", bounty: 1600000),
+        BountyInfo(name: "robin", bounty: 8000000),
+        BountyInfo(name: "sanji", bounty: 77000000),
+        BountyInfo(name: "zoro", bounty: 120000000)
+    ]
+    
+//    Model로 만들어주었으므로, 아래는 주석처리함
+//    let nameList = ["brook", "chopper", "franky", "luffy", "nami", "robin", "sanji", "zoro"]
+//    let bountyList = [3300000, 50, 4400000, 300000000, 1600000, 8000000, 7700000, 120000000]
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 이 함수는 아래의 Delegate가 실행되고 나서, Modal을 띄우기 전에 준비하는 함수이다.
@@ -25,8 +48,10 @@ class BountyViewController: UIViewController {
             // Delegate 에서 전달받은 sender를 Int로 다운캐스팅 한다.
             if let index = sender as? Int {
                 // 미리 DetailViewController에 선언해놓은 name, bounty 변수에 각각 값을 할당해준다.
-                vc?.name = nameList[index]
-                vc?.bounty = bountyList[index]
+                let bountyInfo = bountyInfoList[index]
+                vc?.bountyInfo = bountyInfo
+//                vc?.name = bountyInfo.name
+//                vc?.bounty = bountyInfo.bounty
             }
             
         }
@@ -43,18 +68,18 @@ class BountyViewController: UIViewController {
 // : 위 두 가지는 필수적으로 정의를 해주어야 한다.
 extension BountyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bountyList.count
+        return bountyInfoList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCustomCell else {
             return UITableViewCell()
         }
-        
-        let image = UIImage(named: "\(nameList[indexPath.row]).jpg")
+        let bountyInfo = bountyInfoList[indexPath.row]
+        let image = UIImage(named: "\(bountyInfo.name).jpg")
         cell.imgView.image = image
-        cell.bountyLabel.text = "\(bountyList[indexPath.row])"
-        cell.nameLabel.text = nameList[indexPath.row]
+        cell.bountyLabel.text = "\(bountyInfo.bounty)"
+        cell.nameLabel.text = bountyInfo.name
         
         return cell
     }
@@ -74,4 +99,16 @@ extension BountyViewController: UITableViewDelegate {
     }
 }
 
-
+struct BountyInfo {
+    let name: String
+    let bounty: Int
+    
+    var image: UIImage? {
+        return UIImage(named: "\(name).jpg")
+    }
+    
+    init(name: String, bounty: Int) {
+        self.name = name
+        self.bounty = bounty
+    }
+}
