@@ -17,6 +17,6 @@ class GridCell: UICollectionViewCell {
     func updateCell(data: BountyInfo) {
         imgView.image = data.image
         nameLabel.text = data.name
-        bountyLabel.text = "\(data.bounty)"
+        bountyLabel.text = data.bounty.commaSeperated
     }
 }

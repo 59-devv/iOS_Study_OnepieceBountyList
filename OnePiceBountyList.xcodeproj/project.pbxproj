@@ -17,6 +17,7 @@
 		EE8B933327BF714500234365 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B933227BF714500234365 /* DetailViewController.swift */; };
 		EED3AC4B27C9196700F1CD95 /* BountyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3AC4A27C9196600F1CD95 /* BountyInfo.swift */; };
 		EED3AC4D27C9284000F1CD95 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3AC4C27C9284000F1CD95 /* GridCell.swift */; };
+		EED3AC4F27C93D0900F1CD95 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED3AC4E27C93D0900F1CD95 /* extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		EE8B933227BF714500234365 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		EED3AC4A27C9196600F1CD95 /* BountyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BountyInfo.swift; sourceTree = "<group>"; };
 		EED3AC4C27C9284000F1CD95 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
+		EED3AC4E27C93D0900F1CD95 /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
+		EED3AC5027C93FF000F1CD95 /* test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = test.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +51,7 @@
 		EE8B930E27BF4E7000234365 = {
 			isa = PBXGroup;
 			children = (
+				EED3AC5027C93FF000F1CD95 /* test.playground */,
 				EE8B931927BF4E7000234365 /* OnePiceBountyList */,
 				EE8B931827BF4E7000234365 /* Products */,
 			);
@@ -75,6 +79,7 @@
 				EED3AC4C27C9284000F1CD95 /* GridCell.swift */,
 				EE8B933227BF714500234365 /* DetailViewController.swift */,
 				EED3AC4A27C9196600F1CD95 /* BountyInfo.swift */,
+				EED3AC4E27C93D0900F1CD95 /* extension.swift */,
 			);
 			path = OnePiceBountyList;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 				EE8B933127BF6CDC00234365 /* ListCustomCell.swift in Sources */,
 				EED3AC4B27C9196700F1CD95 /* BountyInfo.swift in Sources */,
 				EE8B931D27BF4E7000234365 /* SceneDelegate.swift in Sources */,
+				EED3AC4F27C93D0900F1CD95 /* extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
